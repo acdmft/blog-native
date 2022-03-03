@@ -16,18 +16,21 @@ export default function Login() {
   const context = useContext(BlogContext);
 
   const handleSubmit = () => {
-    if (/\d+$/.test(inputVal) && parseInt(inputVal)>0 && parseInt(inputVal <=10)) {
+    if (!/^\d+$/.test(inputVal)) {
+      Alert.alert('Id should contain only digits!');
+    } else if (parseInt(inputVal) <= 0 || parseInt(inputVal) > 10) {
+      Alert.alert('Id should be more than 0 and equal or less than 10!');
+    } else {
       context.setIsLoggedIn();
       context.setUserId(inputVal);
       navigate("/");
-    } else {
-      Alert.alert('Id should contain only digits and be equal or less than 10!');
     }
   };
 
   return (
     <View style={styles.container}>
       <Text>Login page</Text>
+      <Text>Enter your id (number from 1 to 10)</Text>
       <TextInput
         style={styles.input}
         placeholder="Id"
