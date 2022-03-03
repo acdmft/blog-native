@@ -1,21 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NativeRouter, Routes, Route } from "react-router-native";
+import { useState, createContext } from "react";
+
+import Home from "./views/Home";
+import Login from "./views/Login";
+
+export const BlogContext = createContext("");
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleLoggedIn = () => {
+    setIsLoggedIn((prev) => !prev);
+  };
+  const contextValue = {
+    isLoggedIn: isLoggedIn,
+    setIsLoggedIn: handleLoggedIn,
+  };
+  // returns Home or Login page depending on if the user is logged in
+  const renderFirstPage= () => {
+    return isLoggedIn ? (
+      <Home context={contextValue} />
+    ) : (
+      <Login context={contextValue} />
+    );
+  };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    <BlogContext.Provider value={contextValue}>
+    <NativeRouter>
+      <Routes>
+        <Route exact path="/" element={renderFirstPage()} />
+      </Routes>
+    </NativeRouter>
+    </BlogContext.Provider>
+  )
+}
