@@ -15,7 +15,7 @@ export default function App() {
   const contextValue = {
     isLoggedIn: isLoggedIn,
     setIsLoggedIn: handleLoggedIn,
-    userId: "",
+    userId: userId,
     setUserId: setUserId,
   };
   // returns Home or Login page depending on if the user is logged in
