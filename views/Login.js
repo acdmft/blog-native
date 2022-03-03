@@ -23,6 +23,7 @@ export default function Login() {
     } else {
       context.setIsLoggedIn();
       context.setUserId(inputVal);
+      console.log('userId', context.userId);
       navigate("/");
     }
   };
