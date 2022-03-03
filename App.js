@@ -8,12 +8,15 @@ export const BlogContext = createContext("");
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("");
   const handleLoggedIn = () => {
     setIsLoggedIn((prev) => !prev);
   };
   const contextValue = {
     isLoggedIn: isLoggedIn,
     setIsLoggedIn: handleLoggedIn,
+    userId: "",
+    setUserId: setUserId,
   };
   // returns Home or Login page depending on if the user is logged in
   const renderFirstPage= () => {
