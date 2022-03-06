@@ -22,11 +22,11 @@ export default function Login() {
       Alert.alert('Id should be more than 0 and equal or less than 10!');
     } else {
       context.setIsLoggedIn();
-      context.setUserId(inputVal);
+      context.setUserId(inputVal);      
       navigate("/");
     }
   };
-
+  
   return (
     <View style={styles.container}>
       <Text>Login page</Text>
