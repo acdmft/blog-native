@@ -1,8 +1,10 @@
 import { NativeRouter, Routes, Route } from "react-router-native";
-import { useState, createContext } from "react";
-
+import { useState, createContext, useEffect } from "react";
+// Views
 import Home from "./views/Home";
 import Login from "./views/Login";
+
+import { fetchPosts } from "./API";
 
 export const BlogContext = createContext("");
 
@@ -29,6 +31,15 @@ export default function App() {
       <Login context={contextValue} />
     );
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((res) => res.json())
+        .then((res) => setPosts(res))
+        .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   return (
     <BlogContext.Provider value={contextValue}>

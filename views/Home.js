@@ -20,6 +20,7 @@ export default function Home() {
   const context = useContext(BlogContext);
   const logOut = () => {
     context.setIsLoggedIn();
+    context.setUserId("");
     setView("Login");
   };
 
